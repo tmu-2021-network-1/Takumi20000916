@@ -5,24 +5,36 @@ const endpoint = `${uri}?id=${id}&sheet=${sheet}`;
 
 const renderJson = (json) => {
   const studios = json.records;
-  
   studios.pop();
   
   studios.forEach(studio => {
    const studioDiv = document.createElement('div');
-   const studioTitle = document.createElement("span");
+
+   const studioTitle = document.createElement('div');
    studioTitle.className = 'studio-title';
    studioTitle.textContent = studio['name-ja'];
-   const studioTitleEn = document.createElement("span");
-   studioTitleEn.className = 'studio-title-en';
-   studioTitleEn.textContent = studio['name-en'];
+
+   const studioT = document.createElement('div');
+   studioT.className = 'studio-t';
+   studioT.textContent = studio['core-ja'];
+
+   const description = document.createElement('div');
+   description.className = 'description ';
+   description.textContent = studio['description-ja'];
+
+   const studioImage = document.createElement('img');
+   studioImage.className = 'studio-image';
+   studioImage.src = studio['photo1'];
+   studioImage.alt = 'スタジオの画像。';
+
+   studioDiv.appendChild(studioImage);
    studioDiv.appendChild(studioTitle);
-   studioDiv.appendChild(studioTitleEn);
+   studioDiv.appendChild(studioT);
+   studioDiv.appendChild(description);
+
    document.getElementById('studios').appendChild(studioDiv);
-   const studios = json.records;
-   studios.pop();
  });
-  document.getElementById('result').textContent = JSON.stringify(json, null, 2);
+  /*document.getElementById('result').textContent = JSON.stringify(json, null, 2);*/
 }
 
 const getData = async () => {
